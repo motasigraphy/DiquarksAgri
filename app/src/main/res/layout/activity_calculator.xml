@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E2A1F"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+        <!-- IMAGE CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="30dp">
+
+            <ImageView
+                android:id="@+id/ivSelectedPlant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- TITLE -->
+        <TextView
+            android:id="@+id/tvPlantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculateur de Plants"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp" />
+
+        <!-- FORM CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="22dp"
+            app:cardBackgroundColor="#1A3D2F"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Acheteur -->
+                <EditText
+                    android:id="@+id/etAcheteur"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Nom de l'acheteur"
+                    android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#A0A0A0"
+                    android:background="@drawable/btn_with_shadow"
+                    android:paddingStart="15dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Surface -->
+                <EditText
+                    android:id="@+id/etSurface"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Surface (Hectare)"
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#A0A0A0"
+                    android:background="@drawable/btn_with_shadow"
+                    android:paddingStart="15dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- DENSITE AUTOMATIQUE -->
+                <TextView
+                    android:id="@+id/tvDensite"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/btn_with_shadow"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Prix -->
+                <EditText
+                    android:id="@+id/etPrix"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Prix unitaire (DH)"
+                    android:inputType="numberDecimal"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#A0A0A0"
+                    android:background="@drawable/btn_with_shadow"
+                    android:paddingStart="15dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Date automatique -->
+                <EditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/btn_with_shadow"
+                    android:enabled="false"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Mode -->
+                <RadioGroup
+                    android:id="@+id/rgMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/rbNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Normal"
+                        android:textColor="#FFFFFF"
+                        android:checked="true"
+                        android:layout_marginEnd="30dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbDense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dense (+20%)"
+                        android:textColor="#FFFFFF" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCalculer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="CALCULER ET PDF"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="22dp" />
+
+    </LinearLayout>
+</ScrollView>
