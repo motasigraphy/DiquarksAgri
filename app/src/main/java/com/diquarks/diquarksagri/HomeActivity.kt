@@ -85,21 +85,28 @@ class HomeActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED
         ) return
 
-        fusedLocationClient.getCurrentLocation(
-            Priority.PRIORITY_HIGH_ACCURACY,
-            null
-        ).addOnSuccessListener { location ->
+        fusedLocationClient
+            .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+            .addOnSuccessListener { location ->
 
-            if (location != null) {
+                if (location != null) {
 
-                getWeather(location.latitude, location.longitude)
+                    val latitude = location.latitude
+                    val longitude = location.longitude
 
-            } else {
+                    getWeather(latitude, longitude)
 
-                txtWeatherDesc.text = "Location not available"
+                } else {
+
+                    txtWeatherDesc.text = "Location unavailable"
+
+                }
+            }
+            .addOnFailureListener {
+
+                txtWeatherDesc.text = "Location error"
 
             }
-        }
     }
 
     // ================= WEATHER =================
@@ -122,7 +129,6 @@ class HomeActivity : AppCompatActivity() {
                         val temperature = weather.main.temp
                         val description = weather.weather[0].description
                         val condition = weather.weather[0].main
-
                         val humidity = weather.main.humidity
                         val windSpeed = weather.wind.speed
                         val city = weather.name
@@ -144,7 +150,7 @@ class HomeActivity : AppCompatActivity() {
 
                     } else {
 
-                        txtWeatherDesc.text = "Weather error"
+                        txtWeatherDesc.text = "Weather data error"
 
                     }
                 }
@@ -240,7 +246,7 @@ class HomeActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    "Permission Denied",
+                    "Location permission required",
                     Toast.LENGTH_SHORT
                 ).show()
 
