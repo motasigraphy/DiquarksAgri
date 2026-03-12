@@ -30,7 +30,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var txtCity: TextView
     private lateinit var imgWeatherIcon: ImageView
 
-    private val apiKey = "faf0bdd2459e7b141c8587bc71028bf5"
+    // API KEY الجديد
+    private val apiKey = "c115674ab27a4e9a916212605261203"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,10 +92,10 @@ class HomeActivity : AppCompatActivity() {
 
                 if (location != null) {
 
-                    val latitude = location.latitude
-                    val longitude = location.longitude
+                    val locationQuery =
+                        "${location.latitude},${location.longitude}"
 
-                    getWeather(latitude, longitude)
+                    getWeather(locationQuery)
 
                 } else {
 
@@ -102,19 +103,14 @@ class HomeActivity : AppCompatActivity() {
 
                 }
             }
-            .addOnFailureListener {
-
-                txtWeatherDesc.text = "Location error"
-
-            }
     }
 
     // ================= WEATHER =================
 
-    private fun getWeather(lat: Double, lon: Double) {
+    private fun getWeather(location: String) {
 
         RetrofitInstance.api
-            .getWeather(lat, lon, apiKey)
+            .getWeather(apiKey, location)
             .enqueue(object : Callback<WeatherResponse> {
 
                 override fun onResponse(
@@ -126,22 +122,21 @@ class HomeActivity : AppCompatActivity() {
 
                         val weather = response.body()!!
 
-                        val temperature = weather.main.temp
-                        val description = weather.weather[0].description
-                        val condition = weather.weather[0].main
-                        val humidity = weather.main.humidity
-                        val windSpeed = weather.wind.speed
-                        val city = weather.name
+                        val temperature = weather.current.temp_c
+                        val description = weather.current.condition.text
+                        val humidity = weather.current.humidity
+                        val wind = weather.current.wind_kph
+                        val city = weather.location.name
+                        val condition = weather.current.condition.text
 
                         txtTemperature.text = "${temperature.toInt()}°C"
 
-                        txtWeatherDesc.text =
-                            description.replaceFirstChar { it.uppercase() }
+                        txtWeatherDesc.text = description
 
                         txtCity.text = city
 
                         txtDetails.text =
-                            "Humidité: $humidity% • Vent: $windSpeed m/s"
+                            "Humidité: $humidity% • Vent: $wind km/h"
 
                         txtRecommendations.text =
                             getRecommendations(condition)
@@ -150,7 +145,7 @@ class HomeActivity : AppCompatActivity() {
 
                     } else {
 
-                        txtWeatherDesc.text = "Weather data error"
+                        txtWeatherDesc.text = "Weather error"
 
                     }
                 }
@@ -170,21 +165,21 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getRecommendations(weather: String): String {
 
-        return when (weather) {
+        return when {
 
-            "Rain" -> """
+            weather.contains("rain", true) -> """
                 • Éviter l’arrosage
                 • Protéger les plantes
                 • Vérifier le drainage
             """.trimIndent()
 
-            "Clear" -> """
+            weather.contains("sun", true) || weather.contains("clear", true) -> """
                 • Arroser les plantes
                 • Planter des légumes
                 • Travailler le sol
             """.trimIndent()
 
-            "Clouds" -> """
+            weather.contains("cloud", true) -> """
                 • Planter des tomates
                 • Récolter des fraises
                 • Arroser le soir
@@ -201,18 +196,19 @@ class HomeActivity : AppCompatActivity() {
 
     private fun updateWeatherIcon(condition: String) {
 
-        when (condition) {
+        when {
 
-            "Clear" ->
+            condition.contains("sun", true) ||
+                    condition.contains("clear", true) ->
                 imgWeatherIcon.setImageResource(R.drawable.ic_sun)
 
-            "Clouds", "Smoke", "Haze", "Mist", "Fog" ->
+            condition.contains("cloud", true) ->
                 imgWeatherIcon.setImageResource(R.drawable.ic_cloud)
 
-            "Rain" ->
+            condition.contains("rain", true) ->
                 imgWeatherIcon.setImageResource(R.drawable.ic_rain)
 
-            "Thunderstorm" ->
+            condition.contains("storm", true) ->
                 imgWeatherIcon.setImageResource(R.drawable.ic_storm)
 
             else ->

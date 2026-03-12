@@ -6,13 +6,10 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("weather")
+    @GET("v1/current.json")
     fun getWeather(
-        @Query("lat") lat: Double,
-        @Query("lon") lon: Double,
-        @Query("appid") apiKey: String,
-        @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "fr"
+        @Query("key") apiKey: String,
+        @Query("q") location: String
     ): Call<WeatherResponse>
 
 }

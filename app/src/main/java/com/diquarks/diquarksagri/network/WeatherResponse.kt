@@ -1,22 +1,23 @@
 package com.diquarks.diquarksagri.network
 
 data class WeatherResponse(
-    val weather: List<Weather>,
-    val main: Main,
-    val wind: Wind,
-    val name: String
+    val location: Location,
+    val current: Current
 )
 
-data class Weather(
-    val main: String,
-    val description: String
+data class Location(
+    val name: String,
+    val country: String
 )
 
-data class Main(
-    val temp: Double,
-    val humidity: Int
+data class Current(
+    val temp_c: Double,
+    val humidity: Int,
+    val wind_kph: Double,
+    val condition: Condition
 )
 
-data class Wind(
-    val speed: Double
+data class Condition(
+    val text: String,
+    val icon: String
 )
