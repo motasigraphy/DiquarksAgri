@@ -3,6 +3,7 @@ package com.diquarks.diquarksagri
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,7 @@ import com.diquarks.diquarksagri.network.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class HomeActivity : AppCompatActivity() {
 
@@ -30,7 +32,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var txtCity: TextView
     private lateinit var imgWeatherIcon: ImageView
 
-    // API KEY الجديد
     private val apiKey = "c115674ab27a4e9a916212605261203"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,9 +93,32 @@ class HomeActivity : AppCompatActivity() {
 
                 if (location != null) {
 
-                    val locationQuery =
-                        "${location.latitude},${location.longitude}"
+                    val lat = location.latitude
+                    val lon = location.longitude
 
+                    try {
+
+                        val geocoder = Geocoder(this, Locale.getDefault())
+                        val addresses = geocoder.getFromLocation(lat, lon, 1)
+
+                        if (!addresses.isNullOrEmpty()) {
+
+                            val cityName =
+                                addresses[0].locality
+                                    ?: addresses[0].subAdminArea
+                                    ?: addresses[0].adminArea
+
+                            if (cityName != null) {
+                                txtCity.text = cityName
+                            }
+
+                        }
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    val locationQuery = "$lat,$lon"
                     getWeather(locationQuery)
 
                 } else {
@@ -102,6 +126,11 @@ class HomeActivity : AppCompatActivity() {
                     txtWeatherDesc.text = "Location unavailable"
 
                 }
+            }
+            .addOnFailureListener {
+
+                txtWeatherDesc.text = "Location error"
+
             }
     }
 
@@ -118,34 +147,35 @@ class HomeActivity : AppCompatActivity() {
                     response: Response<WeatherResponse>
                 ) {
 
-                    if (response.isSuccessful && response.body() != null) {
+                    if (response.isSuccessful) {
 
-                        val weather = response.body()!!
+                        val weather = response.body()
 
-                        val temperature = weather.current.temp_c
-                        val description = weather.current.condition.text
-                        val humidity = weather.current.humidity
-                        val wind = weather.current.wind_kph
-                        val city = weather.location.name
-                        val condition = weather.current.condition.text
+                        if (weather != null) {
 
-                        txtTemperature.text = "${temperature.toInt()}°C"
+                            val temperature = weather.current.temp_c
+                            val description = weather.current.condition.text
+                            val humidity = weather.current.humidity
+                            val wind = weather.current.wind_kph
+                            val isDay = weather.current.is_day
 
-                        txtWeatherDesc.text = description
+                            txtTemperature.text = "${temperature.toInt()}°C"
+                            txtWeatherDesc.text = description
 
-                        txtCity.text = city
+                            txtDetails.text =
+                                "Humidité: $humidity% • Vent: $wind km/h"
 
-                        txtDetails.text =
-                            "Humidité: $humidity% • Vent: $wind km/h"
+                            txtRecommendations.text =
+                                getRecommendations(description)
 
-                        txtRecommendations.text =
-                            getRecommendations(condition)
+                            updateWeatherIcon(description, isDay)
 
-                        updateWeatherIcon(condition)
+                        }
 
                     } else {
 
-                        txtWeatherDesc.text = "Weather error"
+                        txtWeatherDesc.text =
+                            "API Error: ${response.code()}"
 
                     }
                 }
@@ -157,6 +187,11 @@ class HomeActivity : AppCompatActivity() {
 
                     txtWeatherDesc.text = "Network error"
 
+                    Toast.makeText(
+                        this@HomeActivity,
+                        t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             })
     }
@@ -173,7 +208,7 @@ class HomeActivity : AppCompatActivity() {
                 • Vérifier le drainage
             """.trimIndent()
 
-            weather.contains("sun", true) || weather.contains("clear", true) -> """
+            weather.contains("clear", true) -> """
                 • Arroser les plantes
                 • Planter des légumes
                 • Travailler le sol
@@ -194,25 +229,45 @@ class HomeActivity : AppCompatActivity() {
 
     // ================= WEATHER ICON =================
 
-    private fun updateWeatherIcon(condition: String) {
+    private fun updateWeatherIcon(condition: String, isDay: Int) {
 
-        when {
+        val night = isDay == 0
 
-            condition.contains("sun", true) ||
-                    condition.contains("clear", true) ->
-                imgWeatherIcon.setImageResource(R.drawable.ic_sun)
+        if (night) {
 
-            condition.contains("cloud", true) ->
-                imgWeatherIcon.setImageResource(R.drawable.ic_cloud)
+            when {
 
-            condition.contains("rain", true) ->
-                imgWeatherIcon.setImageResource(R.drawable.ic_rain)
+                condition.contains("rain", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_rain_night)
 
-            condition.contains("storm", true) ->
-                imgWeatherIcon.setImageResource(R.drawable.ic_storm)
+                condition.contains("storm", true) ||
+                        condition.contains("thunder", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_storm_night)
 
-            else ->
-                imgWeatherIcon.setImageResource(R.drawable.ic_cloud)
+                condition.contains("cloud", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_cloud_night)
+
+                else ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_moon)
+            }
+
+        } else {
+
+            when {
+
+                condition.contains("rain", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_rain)
+
+                condition.contains("storm", true) ||
+                        condition.contains("thunder", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_storm)
+
+                condition.contains("cloud", true) ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_cloud)
+
+                else ->
+                    imgWeatherIcon.setImageResource(R.drawable.ic_sun)
+            }
         }
     }
 
