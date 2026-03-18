@@ -3,7 +3,7 @@
 
     <!-- ================= PERMISSIONS ================= -->
 
-    <!-- Internet (باش نستعمل Weather API) -->
+    <!-- Internet (API + backend) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Location Permissions -->
@@ -18,10 +18,10 @@
         android:label="Diquarks Agri"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.DiquarksAgri">
 
         <!-- ===== Login Activity (Launcher) ===== -->
-
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
@@ -34,19 +34,16 @@
         </activity>
 
         <!-- ===== Home Activity ===== -->
-
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
 
         <!-- ===== Other Activities ===== -->
-
         <activity android:name=".GuideActivity" />
         <activity android:name=".PlantsActivity" />
         <activity android:name=".CalculatorActivity" />
 
         <!-- ===== FileProvider (PDF) ===== -->
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
