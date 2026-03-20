@@ -9,6 +9,66 @@
     android:background="@drawable/bg_farmer"
     tools:context=".ui.login.LoginActivity">
 
+    <!-- 🔥 LANGUAGE SWITCHER (CAPSULE STYLE) -->
+
+    <LinearLayout
+        android:id="@+id/langSwitcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_language"
+        android:padding="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="6dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- AR (selected by default) -->
+
+        <TextView
+            android:id="@+id/btnAr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AR"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_lang_selected"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+        <!-- separator -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"/>
+
+        <!-- FR -->
+
+        <TextView
+            android:id="@+id/btnFr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FR"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+    </LinearLayout>
+
     <!-- LOGO -->
 
     <ImageView
