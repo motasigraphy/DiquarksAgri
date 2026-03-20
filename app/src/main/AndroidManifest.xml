@@ -3,10 +3,10 @@
 
     <!-- ================= PERMISSIONS ================= -->
 
-    <!-- Internet (API + backend) -->
+    <!-- Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Location Permissions -->
+    <!-- Location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -21,7 +21,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.DiquarksAgri">
 
-        <!-- ===== Login Activity (Launcher) ===== -->
+        <!-- ===== LOGIN (Launcher) ===== -->
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
@@ -33,17 +33,17 @@
 
         </activity>
 
-        <!-- ===== Home Activity ===== -->
+        <!-- ===== HOME ===== -->
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
 
-        <!-- ===== Other Activities ===== -->
+        <!-- ===== OTHER SCREENS ===== -->
         <activity android:name=".GuideActivity" />
         <activity android:name=".PlantsActivity" />
         <activity android:name=".CalculatorActivity" />
 
-        <!-- ===== FileProvider (PDF) ===== -->
+        <!-- ===== FILE PROVIDER ===== -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
