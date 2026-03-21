@@ -9,12 +9,12 @@
     android:background="@drawable/bg_farmer"
     tools:context=".ui.login.LoginActivity">
 
-    <!-- 🔥 LANGUAGE SWITCHER (CAPSULE STYLE) -->
+    <!-- 🔥 LANGUAGE SWITCHER -->
 
     <LinearLayout
         android:id="@+id/langSwitcher"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_language"
         android:padding="4dp"
@@ -25,47 +25,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- AR (selected by default) -->
-
+        <!-- AR -->
         <TextView
             android:id="@+id/btnAr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AR"
             android:textStyle="bold"
-            android:textSize="13sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/bg_lang_selected"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:textSize="14sp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"/>
+            android:paddingBottom="6dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_lang_selected"/>
 
-        <!-- separator -->
-
+        <!-- / -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="13sp"
-            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textColor="#2E7D32"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"/>
 
         <!-- FR -->
-
         <TextView
             android:id="@+id/btnFr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FR"
             android:textStyle="bold"
-            android:textSize="13sp"
-            android:textColor="#FFFFFF"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:textSize="14sp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"/>
+            android:paddingBottom="6dp"
+            android:textColor="#2E7D32"/>
 
     </LinearLayout>
 
@@ -104,7 +101,6 @@
             android:padding="28dp">
 
             <!-- TITLE -->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,19 +112,17 @@
                 android:layout_marginBottom="24dp"/>
 
             <!-- EMAIL -->
-
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/email_hint"
+                android:inputType="text"
                 android:padding="12dp"
                 android:backgroundTint="#2E7D32"
-                android:inputType="text"
                 android:layout_marginBottom="14dp"/>
 
             <!-- PASSWORD -->
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -154,7 +148,6 @@
             </RelativeLayout>
 
             <!-- LOGIN BUTTON -->
-
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
@@ -165,20 +158,17 @@
                 android:backgroundTint="#2E7D32"
                 android:layout_marginTop="10dp"/>
 
-            <!-- FORGOT PASSWORD -->
-
+            <!-- FORGOT -->
             <TextView
                 android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forgot_password"
                 android:textColor="#2E7D32"
-                android:textSize="14sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"/>
 
             <!-- REGISTER -->
-
             <TextView
                 android:id="@+id/register"
                 android:layout_width="wrap_content"
@@ -186,7 +176,6 @@
                 android:text="@string/register"
                 android:textColor="#2E7D32"
                 android:textStyle="bold"
-                android:textSize="16sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"/>
 
