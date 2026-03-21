@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- APP -->
     <string name="app_name">DiquarksAgri</string>
 
     <!-- PLANTS -->
@@ -17,19 +18,19 @@
     <string name="title_activity_login">Connexion</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Se connecter ou s&apos;inscrire</string>
+    <string name="action_sign_in">Se connecter ou s'inscrire</string>
     <string name="action_sign_in_short">Se connecter</string>
     <string name="welcome">Bienvenue !</string>
-    <string name="invalid_username">Nom d&apos;utilisateur invalide</string>
-    <string name="invalid_password">Le mot de passe doit être &gt; 5 caractères</string>
+    <string name="invalid_username">Nom d'utilisateur invalide</string>
+    <string name="invalid_password">Le mot de passe doit contenir plus de 5 caractères</string>
     <string name="login_failed">Échec de connexion</string>
 
     <!-- UI LOGIN SCREEN -->
     <string name="welcome_title">BIENVENUE</string>
-    <string name="email_hint">Email / Téléphone</string>
+    <string name="email_hint">Email ou Téléphone</string>
     <string name="password_hint">Mot de passe</string>
     <string name="login">SE CONNECTER</string>
     <string name="forgot_password">Mot de passe oublié ?</string>
-    <string name="register">S&apos;inscrire</string>
+    <string name="register">S'inscrire</string>
 
 </resources>

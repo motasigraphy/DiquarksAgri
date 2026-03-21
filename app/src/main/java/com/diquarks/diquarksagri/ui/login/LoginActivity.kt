@@ -22,8 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // 🔥 تحميل اللغة قبل الواجهة
-        loadLocale()
+        loadLocale() // 🔥 مهم قبل setContentView
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -34,26 +33,27 @@ class LoginActivity : AppCompatActivity() {
         val showPassword = findViewById<ImageView>(R.id.showPassword)
         val register = findViewById<TextView>(R.id.register)
 
-        // 🔥 LANGUAGE BUTTONS
         val btnAr = findViewById<TextView>(R.id.btnAr)
         val btnFr = findViewById<TextView>(R.id.btnFr)
 
-        btnAr.setOnClickListener { setLocale("ar") }
-        btnFr.setOnClickListener { setLocale("fr") }
+        // 🔥 LANGUAGE SWITCH
+        btnAr.setOnClickListener { changeLanguage("ar") }
+        btnFr.setOnClickListener { changeLanguage("fr") }
 
         // 👁 SHOW PASSWORD
         showPassword.setOnClickListener {
-            if (passwordVisible) {
-                passwordField.transformationMethod = PasswordTransformationMethod.getInstance()
-                passwordVisible = false
-            } else {
-                passwordField.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                passwordVisible = true
-            }
+            passwordVisible = !passwordVisible
+
+            passwordField.transformationMethod =
+                if (passwordVisible)
+                    HideReturnsTransformationMethod.getInstance()
+                else
+                    PasswordTransformationMethod.getInstance()
+
             passwordField.setSelection(passwordField.text.length)
         }
 
-        // 🔥 LOGIN BUTTON
+        // 🔐 LOGIN
         loginButton.setOnClickListener {
 
             val email = emailField.text.toString().trim()
@@ -75,37 +75,33 @@ class LoginActivity : AppCompatActivity() {
                         val message = json.getString("message")
 
                         if (status == "success") {
-
                             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-                            val intent = Intent(this, HomeActivity::class.java)
-                            startActivity(intent)
+                            startActivity(Intent(this, HomeActivity::class.java))
                             finish()
-
                         } else {
                             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                         }
 
                     } catch (e: Exception) {
-                        Toast.makeText(this, "Error parsing response", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show()
                     }
                 },
-                { error ->
-                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_LONG).show()
+                {
+                    Toast.makeText(this, "Connection error", Toast.LENGTH_LONG).show()
                 }
             ) {
                 override fun getParams(): MutableMap<String, String> {
-                    val params = HashMap<String, String>()
-                    params["email"] = email
-                    params["password"] = password
-                    return params
+                    return hashMapOf(
+                        "email" to email,
+                        "password" to password
+                    )
                 }
             }
 
             Volley.newRequestQueue(this).add(request)
         }
 
-        // 🟢 REGISTER BUTTON
+        // 🟢 REGISTER
         register.setOnClickListener {
 
             val email = emailField.text.toString().trim()
@@ -124,22 +120,21 @@ class LoginActivity : AppCompatActivity() {
                     try {
                         val json = JSONObject(response)
                         val message = json.getString("message")
-
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
                     } catch (e: Exception) {
-                        Toast.makeText(this, "Error parsing response", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show()
                     }
                 },
-                { error ->
-                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_LONG).show()
+                {
+                    Toast.makeText(this, "Connection error", Toast.LENGTH_LONG).show()
                 }
             ) {
                 override fun getParams(): MutableMap<String, String> {
-                    val params = HashMap<String, String>()
-                    params["email"] = email
-                    params["password"] = password
-                    return params
+                    return hashMapOf(
+                        "email" to email,
+                        "password" to password
+                    )
                 }
             }
 
@@ -147,8 +142,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // 🔥 تغيير اللغة
-    private fun setLocale(lang: String) {
+    // 🔥 CHANGE LANGUAGE
+    private fun changeLanguage(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
 
@@ -158,17 +153,15 @@ class LoginActivity : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
 
         val prefs: SharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
-        val editor = prefs.edit()
-        editor.putString("lang", lang)
-        editor.apply()
+        prefs.edit().putString("lang", lang).apply()
 
         recreate()
     }
 
-    // 🔥 تحميل اللغة
+    // 🔥 LOAD LANGUAGE
     private fun loadLocale() {
         val prefs: SharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
-        val lang = prefs.getString("lang", "fr")!!
+        val lang = prefs.getString("lang", "fr") ?: "fr"
 
         val locale = Locale(lang)
         Locale.setDefault(locale)
