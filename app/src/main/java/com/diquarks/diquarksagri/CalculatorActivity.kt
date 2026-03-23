@@ -1,5 +1,6 @@
 package com.diquarks.diquarksagri
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CalculatorActivity : AppCompatActivity() {
+
+    // 🔥 APPLY LANGUAGE
+    override fun attachBaseContext(newBase: Context) {
+        val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val lang = prefs.getString("lang", "fr")
+
+        val locale = Locale(lang!!)
+        Locale.setDefault(locale)
+
+        val config = newBase.resources.configuration
+        config.setLocale(locale)
+
+        val context = newBase.createConfigurationContext(config)
+        super.attachBaseContext(context)
+    }
 
     private lateinit var viewModel: CalculatorViewModel
     private var baseDensite: Double = 0.0
@@ -32,11 +48,9 @@ class CalculatorActivity : AppCompatActivity() {
         val tvPlantName = findViewById<TextView>(R.id.tvPlantName)
         val tvDensite = findViewById<TextView>(R.id.tvDensite)
 
-        // 📅 Date automatique
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         etDate.setText(today)
 
-        // 📥 Données reçues
         val plantName = intent.getStringExtra("PLANT_NAME") ?: ""
         val imageRes = intent.getIntExtra("PLANT_IMAGE", 0)
 
@@ -46,7 +60,6 @@ class CalculatorActivity : AppCompatActivity() {
             ivPlant.setImageResource(imageRes)
         }
 
-        // 🌱 Détection intelligente de la densité
         baseDensite = when {
             plantName.contains("pasteque", true) -> 2400.0
             plantName.contains("poivron", true) -> 16000.0
@@ -61,7 +74,6 @@ class CalculatorActivity : AppCompatActivity() {
 
         tvDensite.text = baseDensite.toInt().toString()
 
-        // 🔄 Gestion RadioButtons
         rbNormal.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 tvDensite.text = baseDensite.toInt().toString()
@@ -115,7 +127,7 @@ class CalculatorActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Veuillez remplir tous les champs correctement",
+                    getString(R.string.invalid_username),
                     Toast.LENGTH_SHORT
                 ).show()
             }

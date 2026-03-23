@@ -1,23 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App -->
     <string name="app_name">DiquarksAgri</string>
 
-    <string name="plant_pasteque">Pasteque rouge – بطيخ أحمر</string>
-    <string name="plant_poivron">Poivron – فلفل حلو</string>
-    <string name="plant_piment">Piment fort – فلفل حار</string>
-    <string name="plant_tomate">Tomate – طماطم</string>
-    <string name="plant_souihla">Souihla – شمام</string>
-    <string name="plant_melon">Melon – شمام أصفر</string>
-    <string name="plant_concombre">Concombre – خيار</string>
-    <string name="plant_aubergine">Aubergine – باذنجان</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <!-- Auth -->
+    <string name="welcome_title">Bienvenue</string>
+    <string name="login">Se connecter</string>
+
+    <!-- Errors -->
+    <string name="invalid_username">Veuillez entrer un email et mot de passe</string>
+    <string name="fill_fields">Veuillez remplir tous les champs correctement</string>
+    <string name="location_error">Erreur de localisation</string>
+    <string name="network_error">Erreur de connexion</string>
+
+    <!-- Plants -->
+    <string name="plant_pasteque">Pastèque</string>
+    <string name="plant_poivron">Poivron</string>
+    <string name="plant_piment">Piment</string>
+    <string name="plant_tomate">Tomate</string>
+    <string name="plant_souihla">Souihla</string>
+    <string name="plant_melon">Melon</string>
+    <string name="plant_concombre">Concombre</string>
+    <string name="plant_aubergine">Aubergine</string>
 
 </resources>

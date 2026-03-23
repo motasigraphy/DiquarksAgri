@@ -1,6 +1,7 @@
 package com.diquarks.diquarksagri
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -22,6 +23,21 @@ import retrofit2.Response
 import java.util.Locale
 
 class HomeActivity : AppCompatActivity() {
+
+    // 🔥 APPLY LANGUAGE
+    override fun attachBaseContext(newBase: Context) {
+        val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val lang = prefs.getString("lang", "fr")
+
+        val locale = Locale(lang!!)
+        Locale.setDefault(locale)
+
+        val config = newBase.resources.configuration
+        config.setLocale(locale)
+
+        val context = newBase.createConfigurationContext(config)
+        super.attachBaseContext(context)
+    }
 
     private val LOCATION_PERMISSION_CODE = 100
 
@@ -70,9 +86,7 @@ class HomeActivity : AppCompatActivity() {
             )
 
         } else {
-
             getLocation()
-
         }
     }
 
@@ -97,7 +111,6 @@ class HomeActivity : AppCompatActivity() {
                     val lon = location.longitude
 
                     try {
-
                         val geocoder = Geocoder(this, Locale.getDefault())
                         val addresses = geocoder.getFromLocation(lat, lon, 1)
 
@@ -111,7 +124,6 @@ class HomeActivity : AppCompatActivity() {
                             if (cityName != null) {
                                 txtCity.text = cityName
                             }
-
                         }
 
                     } catch (e: Exception) {
@@ -122,15 +134,11 @@ class HomeActivity : AppCompatActivity() {
                     getWeather(locationQuery)
 
                 } else {
-
                     txtWeatherDesc.text = "Location unavailable"
-
                 }
             }
             .addOnFailureListener {
-
                 txtWeatherDesc.text = "Location error"
-
             }
     }
 
@@ -169,14 +177,10 @@ class HomeActivity : AppCompatActivity() {
                                 getRecommendations(description)
 
                             updateWeatherIcon(description, isDay)
-
                         }
 
                     } else {
-
-                        txtWeatherDesc.text =
-                            "API Error: ${response.code()}"
-
+                        txtWeatherDesc.text = "API Error: ${response.code()}"
                     }
                 }
 
@@ -184,7 +188,6 @@ class HomeActivity : AppCompatActivity() {
                     call: Call<WeatherResponse>,
                     t: Throwable
                 ) {
-
                     txtWeatherDesc.text = "Network error"
 
                     Toast.makeText(
@@ -290,17 +293,13 @@ class HomeActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() &&
                 grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
-
                 getLocation()
-
             } else {
-
                 Toast.makeText(
                     this,
                     "Location permission required",
                     Toast.LENGTH_SHORT
                 ).show()
-
             }
         }
     }

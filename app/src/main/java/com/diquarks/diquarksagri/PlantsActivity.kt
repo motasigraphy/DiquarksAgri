@@ -1,11 +1,28 @@
 package com.diquarks.diquarksagri
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import java.util.Locale
 
 class PlantsActivity : AppCompatActivity() {
+
+    // 🔥 APPLY LANGUAGE
+    override fun attachBaseContext(newBase: Context) {
+        val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val lang = prefs.getString("lang", "fr")
+
+        val locale = Locale(lang!!)
+        Locale.setDefault(locale)
+
+        val config = newBase.resources.configuration
+        config.setLocale(locale)
+
+        val context = newBase.createConfigurationContext(config)
+        super.attachBaseContext(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
