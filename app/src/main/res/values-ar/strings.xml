@@ -4,7 +4,17 @@
     <!-- APP -->
     <string name="app_name">DiquarksAgri</string>
 
-    <!-- PLANTS -->
+    <!-- Auth -->
+    <string name="welcome_title">مرحبا</string>
+    <string name="login">تسجيل الدخول</string>
+
+    <!-- Errors -->
+    <string name="invalid_username">يرجى إدخال البريد الإلكتروني وكلمة المرور</string>
+    <string name="fill_fields">يرجى ملء جميع الحقول بشكل صحيح</string>
+    <string name="location_error">خطأ في الموقع</string>
+    <string name="network_error">خطأ في الاتصال</string>
+
+    <!-- Plants -->
     <string name="plant_pasteque">بطيخ أحمر</string>
     <string name="plant_poivron">فلفل حلو</string>
     <string name="plant_piment">فلفل حار</string>
@@ -13,24 +23,5 @@
     <string name="plant_melon">شمام</string>
     <string name="plant_concombre">خيار</string>
     <string name="plant_aubergine">باذنجان</string>
-
-    <!-- LOGIN -->
-    <string name="title_activity_login">تسجيل الدخول</string>
-    <string name="prompt_email">البريد الإلكتروني</string>
-    <string name="prompt_password">كلمة المرور</string>
-    <string name="action_sign_in">تسجيل الدخول أو إنشاء حساب</string>
-    <string name="action_sign_in_short">تسجيل الدخول</string>
-    <string name="welcome">مرحبا !</string>
-    <string name="invalid_username">اسم المستخدم غير صالح</string>
-    <string name="invalid_password">يجب أن تحتوي كلمة المرور على أكثر من 5 أحرف</string>
-    <string name="login_failed">فشل تسجيل الدخول</string>
-
-    <!-- UI LOGIN SCREEN -->
-    <string name="welcome_title">مرحبا</string>
-    <string name="email_hint">البريد الإلكتروني أو الهاتف</string>
-    <string name="password_hint">كلمة المرور</string>
-    <string name="login">تسجيل الدخول</string>
-    <string name="forgot_password">نسيت كلمة المرور؟</string>
-    <string name="register">إنشاء حساب</string>
 
 </resources>

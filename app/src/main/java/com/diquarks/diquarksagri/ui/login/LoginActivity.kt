@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        loadLocale() // 🔥 مهم قبل setContentView
+        loadLocale()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -36,11 +36,9 @@ class LoginActivity : AppCompatActivity() {
         val btnAr = findViewById<TextView>(R.id.btnAr)
         val btnFr = findViewById<TextView>(R.id.btnFr)
 
-        // 🔥 LANGUAGE SWITCH
         btnAr.setOnClickListener { changeLanguage("ar") }
         btnFr.setOnClickListener { changeLanguage("fr") }
 
-        // 👁 SHOW PASSWORD
         showPassword.setOnClickListener {
             passwordVisible = !passwordVisible
 
@@ -53,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             passwordField.setSelection(passwordField.text.length)
         }
 
-        // 🔐 LOGIN
         loginButton.setOnClickListener {
 
             val email = emailField.text.toString().trim()
@@ -101,7 +98,6 @@ class LoginActivity : AppCompatActivity() {
             Volley.newRequestQueue(this).add(request)
         }
 
-        // 🟢 REGISTER
         register.setOnClickListener {
 
             val email = emailField.text.toString().trim()
@@ -142,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // 🔥 CHANGE LANGUAGE
     private fun changeLanguage(lang: String) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -158,7 +153,6 @@ class LoginActivity : AppCompatActivity() {
         recreate()
     }
 
-    // 🔥 LOAD LANGUAGE
     private fun loadLocale() {
         val prefs: SharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
         val lang = prefs.getString("lang", "fr") ?: "fr"

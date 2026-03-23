@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App -->
     <string name="app_name">DiquarksAgri</string>
+
+    <!-- Auth -->
     <string name="welcome_title">Bienvenue</string>
     <string name="login">Se connecter</string>
+
+    <!-- Errors -->
+    <string name="invalid_username">Veuillez entrer un email et mot de passe</string>
+    <string name="fill_fields">Veuillez remplir tous les champs correctement</string>
+    <string name="location_error">Erreur de localisation</string>
+    <string name="network_error">Erreur de connexion</string>
+
+    <!-- Plants -->
+    <string name="plant_pasteque">Pastèque</string>
+    <string name="plant_poivron">Poivron</string>
+    <string name="plant_piment">Piment</string>
+    <string name="plant_tomate">Tomate</string>
+    <string name="plant_souihla">Souihla</string>
+    <string name="plant_melon">Melon</string>
+    <string name="plant_concombre">Concombre</string>
+    <string name="plant_aubergine">Aubergine</string>
 
 </resources>
