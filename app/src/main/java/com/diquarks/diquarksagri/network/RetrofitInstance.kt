@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "https://api.weatherapi.com/"
+    private const val BASE_URL = "https://api.weatherapi.com/v1/"
 
     val api: WeatherApi by lazy {
 

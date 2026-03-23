@@ -20,11 +20,11 @@ import com.diquarks.diquarksagri.network.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Locale
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
-    // 🔥 APPLY LANGUAGE
     override fun attachBaseContext(newBase: Context) {
         val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val lang = prefs.getString("lang", "fr")
@@ -41,12 +41,17 @@ class HomeActivity : AppCompatActivity() {
 
     private val LOCATION_PERMISSION_CODE = 100
 
-    private lateinit var txtTemperature: TextView
-    private lateinit var txtWeatherDesc: TextView
-    private lateinit var txtRecommendations: TextView
-    private lateinit var txtDetails: TextView
-    private lateinit var txtCity: TextView
-    private lateinit var imgWeatherIcon: ImageView
+    private lateinit var tempText: TextView
+    private lateinit var weatherText: TextView
+    private lateinit var detailsText: TextView
+    private lateinit var locationText: TextView
+    private lateinit var weatherIcon: ImageView
+
+    // 🔥 WEEKLY
+    private lateinit var dayNames: Array<TextView>
+    private lateinit var dayMins: Array<TextView>
+    private lateinit var dayMaxs: Array<TextView>
+    private lateinit var dayIcons: Array<ImageView>
 
     private val apiKey = "c115674ab27a4e9a916212605261203"
 
@@ -54,12 +59,52 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        txtTemperature = findViewById(R.id.txtTemperature)
-        txtWeatherDesc = findViewById(R.id.txtWeatherDesc)
-        txtRecommendations = findViewById(R.id.txtRecommendations)
-        txtDetails = findViewById(R.id.txtDetails)
-        txtCity = findViewById(R.id.txtCity)
-        imgWeatherIcon = findViewById(R.id.imgWeatherIcon)
+        tempText = findViewById(R.id.tempText)
+        weatherText = findViewById(R.id.weatherText)
+        detailsText = findViewById(R.id.detailsText)
+        locationText = findViewById(R.id.locationText)
+        weatherIcon = findViewById(R.id.weatherIcon)
+
+        // 🔥 WEEKLY INIT
+        dayNames = arrayOf(
+            findViewById(R.id.day1Name),
+            findViewById(R.id.day2Name),
+            findViewById(R.id.day3Name),
+            findViewById(R.id.day4Name),
+            findViewById(R.id.day5Name),
+            findViewById(R.id.day6Name),
+            findViewById(R.id.day7Name)
+        )
+
+        dayMins = arrayOf(
+            findViewById(R.id.day1Min),
+            findViewById(R.id.day2Min),
+            findViewById(R.id.day3Min),
+            findViewById(R.id.day4Min),
+            findViewById(R.id.day5Min),
+            findViewById(R.id.day6Min),
+            findViewById(R.id.day7Min)
+        )
+
+        dayMaxs = arrayOf(
+            findViewById(R.id.day1Max),
+            findViewById(R.id.day2Max),
+            findViewById(R.id.day3Max),
+            findViewById(R.id.day4Max),
+            findViewById(R.id.day5Max),
+            findViewById(R.id.day6Max),
+            findViewById(R.id.day7Max)
+        )
+
+        dayIcons = arrayOf(
+            findViewById(R.id.day1Icon),
+            findViewById(R.id.day2Icon),
+            findViewById(R.id.day3Icon),
+            findViewById(R.id.day4Icon),
+            findViewById(R.id.day5Icon),
+            findViewById(R.id.day6Icon),
+            findViewById(R.id.day7Icon)
+        )
 
         val btn = findViewById<MaterialButton>(R.id.btnCommencer)
         btn.setOnClickListener {
@@ -72,19 +117,16 @@ class HomeActivity : AppCompatActivity() {
     // ================= LOCATION =================
 
     private fun checkLocationPermission() {
-
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_CODE
             )
-
         } else {
             getLocation()
         }
@@ -115,14 +157,13 @@ class HomeActivity : AppCompatActivity() {
                         val addresses = geocoder.getFromLocation(lat, lon, 1)
 
                         if (!addresses.isNullOrEmpty()) {
-
                             val cityName =
                                 addresses[0].locality
                                     ?: addresses[0].subAdminArea
                                     ?: addresses[0].adminArea
 
                             if (cityName != null) {
-                                txtCity.text = cityName
+                                locationText.text = cityName
                             }
                         }
 
@@ -134,11 +175,11 @@ class HomeActivity : AppCompatActivity() {
                     getWeather(locationQuery)
 
                 } else {
-                    txtWeatherDesc.text = "Location unavailable"
+                    weatherText.text = "Location unavailable"
                 }
             }
             .addOnFailureListener {
-                txtWeatherDesc.text = "Location error"
+                weatherText.text = "Location error"
             }
     }
 
@@ -167,20 +208,50 @@ class HomeActivity : AppCompatActivity() {
                             val wind = weather.current.wind_kph
                             val isDay = weather.current.is_day
 
-                            txtTemperature.text = "${temperature.toInt()}°C"
-                            txtWeatherDesc.text = description
+                            runOnUiThread {
 
-                            txtDetails.text =
-                                "Humidité: $humidity% • Vent: $wind km/h"
+                                tempText.text = "${temperature.toInt()}°C"
+                                weatherText.text = description
+                                detailsText.text =
+                                    "Humidité: $humidity% • Vent: $wind km/h"
 
-                            txtRecommendations.text =
-                                getRecommendations(description)
+                                updateWeatherIcon(description, isDay)
 
-                            updateWeatherIcon(description, isDay)
+                                // 🔥 WEEKLY
+                                val forecastDays = weather.forecast.forecastday
+
+                                for (i in forecastDays.indices) {
+
+                                    val day = forecastDays[i]
+
+                                    val date = day.date
+                                    val min = day.day.mintemp_c.toInt()
+                                    val max = day.day.maxtemp_c.toInt()
+                                    val condition = day.day.condition.text
+
+                                    val dayName = SimpleDateFormat("EEE", Locale.getDefault())
+                                        .format(SimpleDateFormat("yyyy-MM-dd").parse(date)!!)
+
+                                    dayNames[i].text = dayName
+                                    dayMins[i].text = "$min°"
+                                    dayMaxs[i].text = "$max°"
+
+                                    when {
+                                        condition.contains("rain", true) ->
+                                            dayIcons[i].setImageResource(R.drawable.ic_rain)
+
+                                        condition.contains("cloud", true) ->
+                                            dayIcons[i].setImageResource(R.drawable.ic_cloud)
+
+                                        else ->
+                                            dayIcons[i].setImageResource(R.drawable.ic_sun)
+                                    }
+                                }
+                            }
                         }
 
                     } else {
-                        txtWeatherDesc.text = "API Error: ${response.code()}"
+                        weatherText.text = "API Error: ${response.code()}"
                     }
                 }
 
@@ -188,7 +259,7 @@ class HomeActivity : AppCompatActivity() {
                     call: Call<WeatherResponse>,
                     t: Throwable
                 ) {
-                    txtWeatherDesc.text = "Network error"
+                    weatherText.text = "Network error"
 
                     Toast.makeText(
                         this@HomeActivity,
@@ -199,38 +270,7 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    // ================= AI RECOMMENDATIONS =================
-
-    private fun getRecommendations(weather: String): String {
-
-        return when {
-
-            weather.contains("rain", true) -> """
-                • Éviter l’arrosage
-                • Protéger les plantes
-                • Vérifier le drainage
-            """.trimIndent()
-
-            weather.contains("clear", true) -> """
-                • Arroser les plantes
-                • Planter des légumes
-                • Travailler le sol
-            """.trimIndent()
-
-            weather.contains("cloud", true) -> """
-                • Planter des tomates
-                • Récolter des fraises
-                • Arroser le soir
-            """.trimIndent()
-
-            else -> """
-                • Observer les plantes
-                • Entretenir le jardin
-            """.trimIndent()
-        }
-    }
-
-    // ================= WEATHER ICON =================
+    // ================= ICON =================
 
     private fun updateWeatherIcon(condition: String, isDay: Int) {
 
@@ -239,54 +279,45 @@ class HomeActivity : AppCompatActivity() {
         if (night) {
 
             when {
-
                 condition.contains("rain", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_rain_night)
+                    weatherIcon.setImageResource(R.drawable.ic_rain_night)
 
-                condition.contains("storm", true) ||
-                        condition.contains("thunder", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_storm_night)
+                condition.contains("storm", true) ->
+                    weatherIcon.setImageResource(R.drawable.ic_storm_night)
 
                 condition.contains("cloud", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_cloud_night)
+                    weatherIcon.setImageResource(R.drawable.ic_cloud_night)
 
                 else ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_moon)
+                    weatherIcon.setImageResource(R.drawable.ic_moon)
             }
 
         } else {
 
             when {
-
                 condition.contains("rain", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_rain)
+                    weatherIcon.setImageResource(R.drawable.ic_rain)
 
-                condition.contains("storm", true) ||
-                        condition.contains("thunder", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_storm)
+                condition.contains("storm", true) ->
+                    weatherIcon.setImageResource(R.drawable.ic_storm)
 
                 condition.contains("cloud", true) ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_cloud)
+                    weatherIcon.setImageResource(R.drawable.ic_cloud)
 
                 else ->
-                    imgWeatherIcon.setImageResource(R.drawable.ic_sun)
+                    weatherIcon.setImageResource(R.drawable.ic_sun)
             }
         }
     }
 
-    // ================= PERMISSION RESULT =================
+    // ================= PERMISSION =================
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
-        super.onRequestPermissionsResult(
-            requestCode,
-            permissions,
-            grantResults
-        )
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == LOCATION_PERMISSION_CODE) {
 

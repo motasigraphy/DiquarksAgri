@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    ```
     <!-- Background -->
     <ImageView
         android:id="@+id/bgImage"
@@ -50,6 +49,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/weatherIcon"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/ic_sun"/>
@@ -61,6 +61,7 @@
                 android:layout_marginStart="15dp">
 
                 <TextView
+                    android:id="@+id/tempText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="24°C"
@@ -69,18 +70,21 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/weatherText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunny"
                     android:textColor="#333333"/>
 
                 <TextView
+                    android:id="@+id/locationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rabat, Morocco"
                     android:textColor="#555555"/>
 
                 <TextView
+                    android:id="@+id/detailsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Humidité: 61% • Vent: 3.6 km/h"
@@ -127,62 +131,60 @@
                 android:orientation="horizontal"
                 android:weightSum="7">
 
-                <!-- Day Item Template repeated -->
-
-                <!-- Mon -->
+                <!-- Day 1 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mon"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_sun"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day1Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mon"/>
+                    <ImageView android:id="@+id/day1Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_sun"/>
+                    <TextView android:id="@+id/day1Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day1Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
-                <!-- Tue -->
+                <!-- Day 2 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tue"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day2Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tue"/>
+                    <ImageView android:id="@+id/day2Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day2Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day2Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
-                <!-- Wed -->
+                <!-- Day 3 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wed"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day3Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wed"/>
+                    <ImageView android:id="@+id/day3Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day3Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day3Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
-                <!-- Thu -->
+                <!-- Day 4 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thu"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day4Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thu"/>
+                    <ImageView android:id="@+id/day4Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day4Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day4Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
-                <!-- Fri -->
+                <!-- Day 5 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fri"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day5Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fri"/>
+                    <ImageView android:id="@+id/day5Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day5Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day5Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
-                <!-- Sat -->
+                <!-- Day 6 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sat"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="19°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="26°"/>
+                    <TextView android:id="@+id/day6Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sat"/>
+                    <ImageView android:id="@+id/day6Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day6Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="19°"/>
+                    <TextView android:id="@+id/day6Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="26°"/>
                 </LinearLayout>
 
-                <!-- Sun -->
+                <!-- Day 7 -->
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sun"/>
-                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                    <TextView android:id="@+id/day7Name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sun"/>
+                    <ImageView android:id="@+id/day7Icon" android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:id="@+id/day7Min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:id="@+id/day7Max" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -205,6 +207,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    ```
 
 </androidx.constraintlayout.widget.ConstraintLayout>
