@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:layout_height="match_parent">
 
-    <!-- Background Image -->
+    ```
+    <!-- Background -->
     <ImageView
         android:id="@+id/bgImage"
         android:layout_width="0dp"
@@ -18,178 +19,192 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Dark Overlay -->
+    <!-- Overlay -->
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#20000000"
+        android:background="#30000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- Guideline -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08"/>
 
     <!-- Weather Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/weatherCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="#60FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/guideTop"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="#80FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:gravity="center_vertical">
 
-            <!-- Weather Icon -->
             <ImageView
-                android:id="@+id/imgWeatherIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_sun"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_sun"/>
 
-            <!-- Temperature -->
-            <TextView
-                android:id="@+id/txtTemperature"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="--°C"
-                android:textColor="@android:color/white"
-                android:textSize="42sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/imgWeatherIcon"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:orientation="vertical"
+                android:layout_marginStart="15dp">
 
-            <!-- Weather Description -->
-            <TextView
-                android:id="@+id/txtWeatherDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Loading..."
-                android:textColor="#F0FFFFFF"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/txtTemperature"
-                app:layout_constraintTop_toBottomOf="@id/txtTemperature"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24°C"
+                    android:textColor="#000000"
+                    android:textSize="32sp"
+                    android:textStyle="bold"/>
 
-            <!-- City Name -->
-            <TextView
-                android:id="@+id/txtCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="City"
-                android:textColor="#E0FFFFFF"
-                android:textSize="15sp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="@id/txtWeatherDesc"
-                app:layout_constraintTop_toBottomOf="@id/txtWeatherDesc"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunny"
+                    android:textColor="#333333"/>
 
-            <!-- Humidity + Wind -->
-            <TextView
-                android:id="@+id/txtDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="Humidité: -- • Vent: --"
-                android:textColor="#D0FFFFFF"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@id/txtCity"
-                app:layout_constraintTop_toBottomOf="@id/txtCity"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rabat, Morocco"
+                    android:textColor="#555555"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidité: 61% • Vent: 3.6 km/h"
+                    android:textColor="#777777"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Recommendation Card -->
+    <!-- Weekly Forecast -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/recommendCard"
+        android:id="@+id/weeklyCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="#60FFFFFF"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="#80FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/weatherCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <!-- AI Icon -->
-            <ImageView
-                android:id="@+id/icAi"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@android:drawable/ic_menu_info_details"
-                android:tint="@android:color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/titleAi"/>
-
-            <!-- Title -->
             <TextView
-                android:id="@+id/titleAi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="AI Recommendations"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:text="Weekly Forecast"
+                android:textColor="#000000"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/icAi"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_marginBottom="15dp"/>
 
-            <!-- Recommendations -->
-            <TextView
-                android:id="@+id/txtRecommendations"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:lineSpacingExtra="6dp"
-                android:text="Loading recommendations..."
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleAi"/>
+                android:orientation="horizontal"
+                android:weightSum="7">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Day Item Template repeated -->
+
+                <!-- Mon -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mon"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_sun"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+                <!-- Tue -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tue"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+                <!-- Wed -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wed"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+                <!-- Thu -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thu"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+                <!-- Fri -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fri"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+                <!-- Sat -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sat"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="19°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="26°"/>
+                </LinearLayout>
+
+                <!-- Sun -->
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sun"/>
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_cloud"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18°"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="25°"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Start Button -->
+    <!-- Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCommencer"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="32dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="40dp"
         android:text="Commencer"
-        android:textSize="18sp"
-        android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:backgroundTint="#4CAF50"
-        app:cornerRadius="24dp"
-        app:elevation="8dp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    ```
 
 </androidx.constraintlayout.widget.ConstraintLayout>
