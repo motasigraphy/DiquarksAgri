@@ -22,13 +22,13 @@
         android:id="@+id/overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#66000000"
+        android:background="#55000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Glass Card Text -->
+    <!-- Guide Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGuide"
         android:layout_width="0dp"
@@ -39,7 +39,7 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="#66FFFFFF"
+        app:cardBackgroundColor="#55FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -56,6 +56,93 @@
             android:lineSpacingExtra="3dp"/>
     </androidx.cardview.widget.CardView>
 
+    <!-- AI Recommendations -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRecommendations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="#55FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/cardGuide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Recommandations"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Recommendation 1 -->
+            <TextView
+                android:id="@+id/rec1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌿 Observer les plantes"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingExtra="2dp"/>
+
+            <!-- Recommendation 2 -->
+            <TextView
+                android:id="@+id/rec2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💧 Arroser régulièrement"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingExtra="2dp"/>
+
+            <!-- Recommendation 3 -->
+            <TextView
+                android:id="@+id/rec3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧪 Vérifier le sol"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingExtra="2dp"/>
+
+            <!-- Recommendation 4 -->
+            <TextView
+                android:id="@+id/rec4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️ Protéger les plantes"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp"
+                android:lineSpacingExtra="2dp"/>
+
+            <!-- Recommendation 5 -->
+            <TextView
+                android:id="@+id/rec5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌱 Fertiliser le sol"
+                android:textColor="@android:color/white"
+                android:lineSpacingExtra="2dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <!-- Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCommencer"
@@ -63,12 +150,14 @@
         android:layout_height="70dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="42dp"
         android:text="Découvrir nos variétés"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        android:letterSpacing="0.05"
         android:gravity="center"
         android:background="@drawable/btn_with_shadow"
         android:backgroundTint="@null"
@@ -78,6 +167,7 @@
         android:insetLeft="0dp"
         android:insetRight="0dp"
         android:stateListAnimator="@null"
+        app:layout_constraintTop_toBottomOf="@id/cardRecommendations"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
