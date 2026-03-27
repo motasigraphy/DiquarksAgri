@@ -6,7 +6,11 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -99,42 +103,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         register.setOnClickListener {
-
-            val email = emailField.text.toString().trim()
-            val password = passwordField.text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, getString(R.string.invalid_username), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val url = "http://10.0.2.2/diquarks_api/register.php"
-
-            val request = object : StringRequest(
-                Request.Method.POST, url,
-                { response ->
-                    try {
-                        val json = JSONObject(response)
-                        val message = json.getString("message")
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-                    } catch (e: Exception) {
-                        Toast.makeText(this, "Server error", Toast.LENGTH_SHORT).show()
-                    }
-                },
-                {
-                    Toast.makeText(this, "Connection error", Toast.LENGTH_LONG).show()
-                }
-            ) {
-                override fun getParams(): MutableMap<String, String> {
-                    return hashMapOf(
-                        "email" to email,
-                        "password" to password
-                    )
-                }
-            }
-
-            Volley.newRequestQueue(this).add(request)
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
