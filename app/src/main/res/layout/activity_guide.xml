@@ -15,129 +15,383 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Dark overlay -->
     <View
         android:id="@+id/overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#55000000"
+        android:background="#66000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Guide Card -->
+    <!-- Top glass card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardGuide"
+        android:id="@+id/cardTop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="130dp"
-        app:cardCornerRadius="20dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="22dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="28dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="#55FFFFFF"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/txtGuide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="Calculez la quantité avant de commencer pour une plantation bien organisée. 🌱"
-            android:textColor="@android:color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:lineSpacingExtra="3dp"/>
-    </androidx.cardview.widget.CardView>
-
-    <!-- AI Recommendations -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardRecommendations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
-        app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="#55FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/cardGuide"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/glass_card_light"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="22dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/topIcon"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:background="@drawable/guide_circle_bg"
+                    android:gravity="center"
+                    android:text="🌱"
+                    android:textColor="#D7FFD9"
+                    android:textSize="28sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMainTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Conseils du jour"
+                        android:textColor="#173C28"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Des recommandations basées sur la météo d’aujourd’hui pour bien préparer votre plantation."
+                        android:textColor="#3B4E43"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="16dp"
+                android:background="#35FFFFFF" />
+
+            <!-- Weather row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:gravity="center"
+                    android:text="☀"
+                    android:textColor="#173C28"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtWeatherLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Météo aujourd’hui"
+                        android:textColor="#45574D"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/txtWeatherValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Ensoleillé • 22°C"
+                        android:textColor="#173C28"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtWeatherState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/weather_state_bg"
+                    android:paddingStart="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="10dp"
+                    android:text="Favorable"
+                    android:textColor="#1E5B34"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Recommendation glass card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRecommendations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="22dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/glass_card_dark"
+            android:orientation="vertical"
+            android:padding="22dp">
 
             <!-- Title -->
             <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Recommandations"
+                android:text="Actions recommandées aujourd’hui"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.02"
-                android:layout_marginBottom="12dp"/>
+                android:textStyle="bold" />
 
-            <!-- Recommendation 1 -->
-            <TextView
-                android:id="@+id/rec1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🌿 Observer les plantes"
-                android:textColor="@android:color/white"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="2dp"/>
+                android:background="#30FFFFFF" />
 
-            <!-- Recommendation 2 -->
-            <TextView
-                android:id="@+id/rec2"
-                android:layout_width="wrap_content"
+            <!-- Item 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="💧 Arroser régulièrement"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="2dp"/>
+                android:layout_marginTop="12dp"
+                android:gravity="top"
+                android:orientation="horizontal">
 
-            <!-- Recommendation 3 -->
-            <TextView
-                android:id="@+id/rec3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🧪 Vérifier le sol"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="2dp"/>
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/dot_green" />
 
-            <!-- Recommendation 4 -->
-            <TextView
-                android:id="@+id/rec4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🛡️ Protéger les plantes"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="2dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <!-- Recommendation 5 -->
-            <TextView
-                android:id="@+id/rec5"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/rec1Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Observer les plantes"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rec1Desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Inspectez les feuilles et repérez d’éventuels signes de maladies."
+                        android:textColor="#E9F1EA"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:background="#26FFFFFF" />
+
+            <!-- Item 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🌱 Fertiliser le sol"
-                android:textColor="@android:color/white"
-                android:lineSpacingExtra="2dp"/>
+                android:layout_marginTop="12dp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/dot_green" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rec2Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arroser légèrement"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rec2Desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Le sol est sec en surface, un arrosage modéré favorisera une bonne humidité."
+                        android:textColor="#E9F1EA"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:background="#26FFFFFF" />
+
+            <!-- Item 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/dot_green" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rec3Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vérifier l’humidité du sol"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rec3Desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Assurez-vous que le sol reste souple et bien drainé."
+                        android:textColor="#E9F1EA"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:background="#26FFFFFF" />
+
+            <!-- Item 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/dot_green" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rec4Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Éviter la fertilisation aujourd’hui"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/rec4Desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Les conditions actuelles ne sont pas idéales pour apporter de l’engrais."
+                        android:textColor="#E9F1EA"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -147,29 +401,28 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCommencer"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="68dp"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="42dp"
-        android:text="Découvrir nos variétés"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:letterSpacing="0.05"
-        android:gravity="center"
+        android:layout_marginBottom="34dp"
         android:background="@drawable/btn_with_shadow"
         android:backgroundTint="@null"
-        app:backgroundTint="@null"
+        android:gravity="center"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:insetLeft="0dp"
         android:insetRight="0dp"
         android:stateListAnimator="@null"
-        app:layout_constraintTop_toBottomOf="@id/cardRecommendations"
+        android:text="Commencer le calcul"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/cardRecommendations" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
