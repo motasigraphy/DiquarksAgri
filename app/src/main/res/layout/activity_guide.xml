@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_farmer"
+    tools:context=".ui.guide.GuideActivity">
 
-    <!-- Background -->
-    <ImageView
-        android:id="@+id/imgBg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_farmer"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Dark overlay -->
+    <!-- Overlay -->
     <View
-        android:id="@+id/overlay"
+        android:id="@+id/overlayDark"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#66000000"
+        android:background="#2E000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Top glass card -->
+    <!-- Top Card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardTop"
+        android:id="@+id/cardConseils"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="168dp"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="22dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="28dp"
+        app:cardBackgroundColor="#E6FFFFFF"
+        app:cardCornerRadius="30dp"
         app:cardElevation="0dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/glass_card_light"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="22dp">
+            android:paddingStart="18dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="14dp">
 
             <!-- Header -->
             <LinearLayout
@@ -59,49 +50,49 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/topIcon"
-                    android:layout_width="68dp"
-                    android:layout_height="68dp"
-                    android:background="@drawable/guide_circle_bg"
+                    android:id="@+id/tvPlantIcon"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/circle_green_bg"
                     android:gravity="center"
                     android:text="🌱"
-                    android:textColor="#D7FFD9"
-                    android:textSize="28sp" />
+                    android:textColor="#A8F07C"
+                    android:textSize="22sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txtMainTitle"
+                        android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Conseils du jour"
-                        android:textColor="#173C28"
-                        android:textSize="24sp"
+                        android:textColor="#163B2A"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtSubTitle"
+                        android:id="@+id/tvSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="Des recommandations basées sur la météo d’aujourd’hui pour bien préparer votre plantation."
-                        android:textColor="#3B4E43"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="1dp"
+                        android:text="Des recommandations basées sur la météo d'aujourd'hui pour bien préparer votre plantation."
+                        android:textColor="#4F4F4F"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="16dp"
-                android:background="#35FFFFFF" />
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="#22000000" />
 
             <!-- Weather row -->
             <LinearLayout
@@ -111,13 +102,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/weatherIcon"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:id="@+id/tvWeatherIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:gravity="center"
                     android:text="☀"
-                    android:textColor="#173C28"
-                    android:textSize="24sp" />
+                    android:textColor="#F6B21A"
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -127,106 +118,126 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txtWeatherLabel"
+                        android:id="@+id/tvWeatherLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Météo aujourd’hui"
-                        android:textColor="#45574D"
-                        android:textSize="13sp" />
+                        android:text="Météo aujourd'hui"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/txtWeatherValue"
+                        android:id="@+id/tvWeatherValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="Ensoleillé • 22°C"
-                        android:textColor="#173C28"
-                        android:textSize="16sp"
+                        android:textColor="#163B2A"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtWeatherState"
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/weather_state_bg"
-                    android:paddingStart="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="10dp"
-                    android:text="Favorable"
-                    android:textColor="#1E5B34"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    app:cardBackgroundColor="#BEEFBF"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/tvBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="9dp"
+                        android:text="Favorable"
+                        android:textColor="#173D2A"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
-    <!-- Recommendation glass card -->
+    <!-- Recommendations Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardRecommendations"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="22dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="28dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#54FFFFFF"
+        app:cardCornerRadius="30dp"
         app:cardElevation="0dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardConseils"
+        app:layout_constraintBottom_toTopOf="@id/btnCommencer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardTop">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/glass_card_dark"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="22dp">
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actions recommandées aujourd’hui"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="#39C46A" />
+
+                <TextView
+                    android:id="@+id/tvActionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Actions recommandées aujourd'hui"
+                    android:textColor="@android:color/white"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginBottom="8dp"
-                android:background="#30FFFFFF" />
+                android:layout_marginBottom="14dp"
+                android:background="#33FFFFFF" />
 
             <!-- Item 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="top"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="14dp"
-                    android:background="@drawable/dot_green" />
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="•"
+                    android:textColor="#2ECC71"
+                    android:textSize="26sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/rec1Title"
+                        android:id="@+id/tvItem1Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Observer les plantes"
@@ -235,14 +246,13 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/rec1Desc"
+                        android:id="@+id/tvItem1Desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="Inspectez les feuilles et repérez d’éventuels signes de maladies."
-                        android:textColor="#E9F1EA"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="5dp"
+                        android:text="Inspectez les feuilles et repérez d'éventuels signes de maladies."
+                        android:textColor="#F0F0F0"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -250,32 +260,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginBottom="4dp"
-                android:background="#26FFFFFF" />
+                android:layout_marginBottom="14dp"
+                android:background="#33FFFFFF" />
 
             <!-- Item 2 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="top"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="14dp"
-                    android:background="@drawable/dot_green" />
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="•"
+                    android:textColor="#2ECC71"
+                    android:textSize="26sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/rec2Title"
+                        android:id="@+id/tvItem2Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Arroser légèrement"
@@ -284,14 +295,13 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/rec2Desc"
+                        android:id="@+id/tvItem2Desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2dp"
+                        android:layout_marginTop="5dp"
                         android:text="Le sol est sec en surface, un arrosage modéré favorisera une bonne humidité."
-                        android:textColor="#E9F1EA"
-                        android:textSize="14sp" />
+                        android:textColor="#F0F0F0"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -299,48 +309,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginBottom="4dp"
-                android:background="#26FFFFFF" />
+                android:layout_marginBottom="14dp"
+                android:background="#33FFFFFF" />
 
             <!-- Item 3 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="top"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="14dp"
-                    android:background="@drawable/dot_green" />
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="•"
+                    android:textColor="#2ECC71"
+                    android:textSize="26sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/rec3Title"
+                        android:id="@+id/tvItem3Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Vérifier l’humidité du sol"
+                        android:text="Vérifier l'humidité du sol"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/rec3Desc"
+                        android:id="@+id/tvItem3Desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2dp"
+                        android:layout_marginTop="5dp"
                         android:text="Assurez-vous que le sol reste souple et bien drainé."
-                        android:textColor="#E9F1EA"
-                        android:textSize="14sp" />
+                        android:textColor="#F0F0F0"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -348,81 +358,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginBottom="4dp"
-                android:background="#26FFFFFF" />
+                android:layout_marginBottom="14dp"
+                android:background="#33FFFFFF" />
 
             <!-- Item 4 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="top"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="14dp"
-                    android:background="@drawable/dot_green" />
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="•"
+                    android:textColor="#2ECC71"
+                    android:textSize="26sp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/rec4Title"
+                        android:id="@+id/tvItem4Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Éviter la fertilisation aujourd’hui"
+                        android:text="Éviter la fertilisation aujourd'hui"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/rec4Desc"
+                        android:id="@+id/tvItem4Desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="Les conditions actuelles ne sont pas idéales pour apporter de l’engrais."
-                        android:textColor="#E9F1EA"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="5dp"
+                        android:text="Les conditions actuelles ne sont pas idéales pour apporter de l'engrais."
+                        android:textColor="#F0F0F0"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
     <!-- Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCommencer"
         android:layout_width="0dp"
-        android:layout_height="68dp"
+        android:layout_height="60dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="22dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="34dp"
-        android:background="@drawable/btn_with_shadow"
-        android:backgroundTint="@null"
-        android:gravity="center"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:insetLeft="0dp"
-        android:insetRight="0dp"
-        android:stateListAnimator="@null"
+        android:layout_marginBottom="24dp"
         android:text="Commencer le calcul"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:backgroundTint="@null"
+        app:backgroundTint="#2E7D32"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardRecommendations" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
