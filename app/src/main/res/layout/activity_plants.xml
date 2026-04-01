@@ -163,11 +163,13 @@
 
         <!-- GRID -->
         <GridLayout
+            android:id="@+id/plantsGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
-            android:useDefaultMargins="false">
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true">
 
             <!-- Pastèque -->
             <androidx.cardview.widget.CardView
@@ -175,10 +177,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -187,7 +190,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Pastèque Rouge"
                         android:scaleType="centerCrop"
                         android:src="@drawable/pasteque" />
@@ -197,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -226,10 +229,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -238,7 +242,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Poivron Doux"
                         android:scaleType="centerCrop"
                         android:src="@drawable/poivron" />
@@ -248,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -277,10 +281,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -289,7 +294,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Piment Fort"
                         android:scaleType="centerCrop"
                         android:src="@drawable/piment" />
@@ -299,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -328,10 +333,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -340,7 +346,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Tomate Fraîche"
                         android:scaleType="centerCrop"
                         android:src="@drawable/tomate" />
@@ -350,7 +356,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -379,10 +385,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -391,7 +398,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Souihla Melon Local"
                         android:scaleType="centerCrop"
                         android:src="@drawable/souihla" />
@@ -401,7 +408,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -430,10 +437,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -442,7 +450,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Melon Jaune"
                         android:scaleType="centerCrop"
                         android:src="@drawable/melon" />
@@ -452,7 +460,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -481,10 +489,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -493,7 +502,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Concombre Vert"
                         android:scaleType="centerCrop"
                         android:src="@drawable/concombre" />
@@ -503,7 +512,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 
@@ -532,10 +541,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -544,7 +554,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="128dp"
+                        android:layout_height="124dp"
                         android:contentDescription="Aubergine Violette"
                         android:scaleType="centerCrop"
                         android:src="@drawable/aubergine" />
@@ -554,7 +564,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingStart="10dp"
-                        android:paddingTop="9dp"
+                        android:paddingTop="8dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="10dp">
 

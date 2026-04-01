@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.GridLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -14,6 +15,8 @@ class PlantsActivity : AppCompatActivity() {
     private lateinit var btnToutes: TextView
     private lateinit var btnLegumes: TextView
     private lateinit var btnFruits: TextView
+
+    private lateinit var plantsGrid: GridLayout
 
     private lateinit var cardPasteque: CardView
     private lateinit var cardPoivron: CardView
@@ -46,7 +49,6 @@ class PlantsActivity : AppCompatActivity() {
         setupPlantClicks()
         setupFilterButtons()
 
-        // الحالة الافتراضية
         showToutes()
     }
 
@@ -54,6 +56,8 @@ class PlantsActivity : AppCompatActivity() {
         btnToutes = findViewById(R.id.btnToutes)
         btnLegumes = findViewById(R.id.btnLegumes)
         btnFruits = findViewById(R.id.btnFruits)
+
+        plantsGrid = findViewById(R.id.plantsGrid)
 
         cardPasteque = findViewById(R.id.cardPasteque)
         cardPoivron = findViewById(R.id.cardPoivron)
@@ -100,29 +104,24 @@ class PlantsActivity : AppCompatActivity() {
     }
 
     private fun setupFilterButtons() {
-        btnToutes.setOnClickListener {
-            showToutes()
-        }
-
-        btnLegumes.setOnClickListener {
-            showLegumes()
-        }
-
-        btnFruits.setOnClickListener {
-            showFruits()
-        }
+        btnToutes.setOnClickListener { showToutes() }
+        btnLegumes.setOnClickListener { showLegumes() }
+        btnFruits.setOnClickListener { showFruits() }
     }
 
     private fun showToutes() {
-        // afficher toutes les plantes
-        cardPasteque.visibility = View.VISIBLE
-        cardPoivron.visibility = View.VISIBLE
-        cardPiment.visibility = View.VISIBLE
-        cardTomate.visibility = View.VISIBLE
-        cardSouihla.visibility = View.VISIBLE
-        cardMelon.visibility = View.VISIBLE
-        cardConcombre.visibility = View.VISIBLE
-        cardAubergine.visibility = View.VISIBLE
+        renderCards(
+            listOf(
+                cardPasteque,
+                cardPoivron,
+                cardPiment,
+                cardTomate,
+                cardSouihla,
+                cardMelon,
+                cardConcombre,
+                cardAubergine
+            )
+        )
 
         setActiveButton(btnToutes)
         setInactiveButton(btnLegumes)
@@ -130,15 +129,15 @@ class PlantsActivity : AppCompatActivity() {
     }
 
     private fun showLegumes() {
-        // légumes فقط
-        cardPasteque.visibility = View.GONE
-        cardPoivron.visibility = View.VISIBLE
-        cardPiment.visibility = View.VISIBLE
-        cardTomate.visibility = View.VISIBLE
-        cardSouihla.visibility = View.GONE
-        cardMelon.visibility = View.GONE
-        cardConcombre.visibility = View.VISIBLE
-        cardAubergine.visibility = View.VISIBLE
+        renderCards(
+            listOf(
+                cardPoivron,
+                cardPiment,
+                cardTomate,
+                cardConcombre,
+                cardAubergine
+            )
+        )
 
         setInactiveButton(btnToutes)
         setActiveButton(btnLegumes)
@@ -146,19 +145,45 @@ class PlantsActivity : AppCompatActivity() {
     }
 
     private fun showFruits() {
-        // fruits فقط
-        cardPasteque.visibility = View.VISIBLE
-        cardPoivron.visibility = View.GONE
-        cardPiment.visibility = View.GONE
-        cardTomate.visibility = View.GONE
-        cardSouihla.visibility = View.VISIBLE
-        cardMelon.visibility = View.VISIBLE
-        cardConcombre.visibility = View.GONE
-        cardAubergine.visibility = View.GONE
+        renderCards(
+            listOf(
+                cardPasteque,
+                cardSouihla,
+                cardMelon
+            )
+        )
 
         setInactiveButton(btnToutes)
         setInactiveButton(btnLegumes)
         setActiveButton(btnFruits)
+    }
+
+    private fun renderCards(cardsToShow: List<CardView>) {
+        val allCards = listOf(
+            cardPasteque,
+            cardPoivron,
+            cardPiment,
+            cardTomate,
+            cardSouihla,
+            cardMelon,
+            cardConcombre,
+            cardAubergine
+        )
+
+        allCards.forEach { card ->
+            card.visibility = View.VISIBLE
+            val parent = card.parent
+            if (parent is GridLayout) {
+                parent.removeView(card)
+            }
+        }
+
+        cardsToShow.forEach { card ->
+            plantsGrid.addView(card)
+        }
+
+        plantsGrid.requestLayout()
+        plantsGrid.invalidate()
     }
 
     private fun setActiveButton(button: TextView) {
