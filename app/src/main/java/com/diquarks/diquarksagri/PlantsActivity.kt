@@ -3,18 +3,32 @@ package com.diquarks.diquarksagri
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import java.util.Locale
 
 class PlantsActivity : AppCompatActivity() {
 
-    // 🔥 APPLY LANGUAGE
+    private lateinit var btnToutes: TextView
+    private lateinit var btnLegumes: TextView
+    private lateinit var btnFruits: TextView
+
+    private lateinit var cardPasteque: CardView
+    private lateinit var cardPoivron: CardView
+    private lateinit var cardPiment: CardView
+    private lateinit var cardTomate: CardView
+    private lateinit var cardSouihla: CardView
+    private lateinit var cardMelon: CardView
+    private lateinit var cardConcombre: CardView
+    private lateinit var cardAubergine: CardView
+
     override fun attachBaseContext(newBase: Context) {
         val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val lang = prefs.getString("lang", "fr")
 
-        val locale = Locale(lang!!)
+        val locale = Locale(lang ?: "fr")
         Locale.setDefault(locale)
 
         val config = newBase.resources.configuration
@@ -28,15 +42,30 @@ class PlantsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plants)
 
-        val cardPasteque = findViewById<CardView>(R.id.cardPasteque)
-        val cardPoivron = findViewById<CardView>(R.id.cardPoivron)
-        val cardPiment = findViewById<CardView>(R.id.cardPiment)
-        val cardTomate = findViewById<CardView>(R.id.cardTomate)
-        val cardSouihla = findViewById<CardView>(R.id.cardSouihla)
-        val cardMelon = findViewById<CardView>(R.id.cardMelon)
-        val cardConcombre = findViewById<CardView>(R.id.cardConcombre)
-        val cardAubergine = findViewById<CardView>(R.id.cardAubergine)
+        initViews()
+        setupPlantClicks()
+        setupFilterButtons()
 
+        // الحالة الافتراضية
+        showToutes()
+    }
+
+    private fun initViews() {
+        btnToutes = findViewById(R.id.btnToutes)
+        btnLegumes = findViewById(R.id.btnLegumes)
+        btnFruits = findViewById(R.id.btnFruits)
+
+        cardPasteque = findViewById(R.id.cardPasteque)
+        cardPoivron = findViewById(R.id.cardPoivron)
+        cardPiment = findViewById(R.id.cardPiment)
+        cardTomate = findViewById(R.id.cardTomate)
+        cardSouihla = findViewById(R.id.cardSouihla)
+        cardMelon = findViewById(R.id.cardMelon)
+        cardConcombre = findViewById(R.id.cardConcombre)
+        cardAubergine = findViewById(R.id.cardAubergine)
+    }
+
+    private fun setupPlantClicks() {
         cardPasteque.setOnClickListener {
             ouvrirCalculateur(getString(R.string.plant_pasteque), R.drawable.pasteque)
         }
@@ -68,6 +97,76 @@ class PlantsActivity : AppCompatActivity() {
         cardAubergine.setOnClickListener {
             ouvrirCalculateur(getString(R.string.plant_aubergine), R.drawable.aubergine)
         }
+    }
+
+    private fun setupFilterButtons() {
+        btnToutes.setOnClickListener {
+            showToutes()
+        }
+
+        btnLegumes.setOnClickListener {
+            showLegumes()
+        }
+
+        btnFruits.setOnClickListener {
+            showFruits()
+        }
+    }
+
+    private fun showToutes() {
+        // afficher toutes les plantes
+        cardPasteque.visibility = View.VISIBLE
+        cardPoivron.visibility = View.VISIBLE
+        cardPiment.visibility = View.VISIBLE
+        cardTomate.visibility = View.VISIBLE
+        cardSouihla.visibility = View.VISIBLE
+        cardMelon.visibility = View.VISIBLE
+        cardConcombre.visibility = View.VISIBLE
+        cardAubergine.visibility = View.VISIBLE
+
+        setActiveButton(btnToutes)
+        setInactiveButton(btnLegumes)
+        setInactiveButton(btnFruits)
+    }
+
+    private fun showLegumes() {
+        // légumes فقط
+        cardPasteque.visibility = View.GONE
+        cardPoivron.visibility = View.VISIBLE
+        cardPiment.visibility = View.VISIBLE
+        cardTomate.visibility = View.VISIBLE
+        cardSouihla.visibility = View.GONE
+        cardMelon.visibility = View.GONE
+        cardConcombre.visibility = View.VISIBLE
+        cardAubergine.visibility = View.VISIBLE
+
+        setInactiveButton(btnToutes)
+        setActiveButton(btnLegumes)
+        setInactiveButton(btnFruits)
+    }
+
+    private fun showFruits() {
+        // fruits فقط
+        cardPasteque.visibility = View.VISIBLE
+        cardPoivron.visibility = View.GONE
+        cardPiment.visibility = View.GONE
+        cardTomate.visibility = View.GONE
+        cardSouihla.visibility = View.VISIBLE
+        cardMelon.visibility = View.VISIBLE
+        cardConcombre.visibility = View.GONE
+        cardAubergine.visibility = View.GONE
+
+        setInactiveButton(btnToutes)
+        setInactiveButton(btnLegumes)
+        setActiveButton(btnFruits)
+    }
+
+    private fun setActiveButton(button: TextView) {
+        button.setBackgroundResource(R.drawable.bg_filter_active)
+    }
+
+    private fun setInactiveButton(button: TextView) {
+        button.setBackgroundResource(R.drawable.bg_filter_inactive)
     }
 
     private fun ouvrirCalculateur(nom: String, imageRes: Int) {

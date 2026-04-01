@@ -5,5 +5,4 @@
         android:startColor="#03160F"
         android:centerColor="#083524"
         android:endColor="#0D4A34" />
-    <corners android:radius="0dp" />
 </shape>
