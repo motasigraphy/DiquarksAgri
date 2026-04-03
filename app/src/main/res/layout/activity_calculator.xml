@@ -3,59 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#071E16"
-    android:fillViewport="true"
-    android:overScrollMode="never">
+    android:background="@drawable/bg_calculator_screen"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="28dp">
+        android:padding="20dp">
 
-        <!-- IMAGE -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:layout_marginBottom="18dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="8dp"
-            app:strokeColor="#1E4E3B"
-            app:strokeWidth="1dp">
-
-            <ImageView
-                android:id="@+id/ivSelectedPlant"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/poivron" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- TITLE -->
-        <TextView
-            android:id="@+id/tvPlantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="18dp"
-            android:text="Poivron"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- FORM CARD -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- MAIN CARD -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
-            app:cardBackgroundColor="#183F32"
+            android:layout_marginTop="20dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="6dp"
-            app:strokeColor="#2E6E58"
-            app:strokeWidth="1dp">
+            app:cardElevation="10dp"
+            android:background="@drawable/bg_main_card">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,124 +27,151 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <EditText
-                    android:id="@+id/etAcheteur"
+                <!-- IMAGE -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/bg_green_field"
-                    android:gravity="center_vertical"
-                    android:hint="Nom de l'acheteur"
-                    android:inputType="textPersonName"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#C6E6C7"
-                    android:textSize="16sp" />
+                    android:layout_height="160dp"
+                    app:cardCornerRadius="20dp">
 
-                <EditText
-                    android:id="@+id/etSurface"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/bg_green_field"
-                    android:gravity="center_vertical"
-                    android:hint="Surface (Hectare)"
-                    android:inputType="numberDecimal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#C6E6C7"
-                    android:textSize="16sp" />
+                    <ImageView
+                        android:id="@+id/ivSelectedPlant"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/poivron" />
+                </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tvDensite"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/bg_green_field"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="16000"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/etPrix"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/bg_green_field"
-                    android:gravity="center_vertical"
-                    android:hint="Prix unitaire (DH)"
-                    android:inputType="numberDecimal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#C6E6C7"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/etDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginBottom="18dp"
-                    android:background="@drawable/bg_green_field"
-                    android:enabled="false"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="2026-04-01"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <RadioGroup
-                    android:id="@+id/rgMode"
+                <!-- TITLE -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical">
 
-                    <RadioButton
-                        android:id="@+id/rbNormal"
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_round_plant_icon" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="28dp"
-                        android:buttonTint="#7C5CFF"
-                        android:checked="true"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:id="@+id/tvPlantName"
+                            android:text="Poivron"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/calc_text_dark" />
+
+                        <TextView
+                            android:text="Calculateur de production"
+                            android:textSize="12sp"
+                            android:textColor="@color/calc_hint" />
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="4dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_small_line"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- FORM -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <!-- INPUT -->
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Nom de l'acheteur"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="14dp"
+                        android:textColor="@color/calc_text_dark"
+                        android:textColorHint="@color/calc_hint"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Surface (Hectare)"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="14dp"
+                        android:textColor="@color/calc_text_dark"
+                        android:textColorHint="@color/calc_hint"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="16000"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="14dp"
+                        android:textColor="@color/calc_text_dark"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Prix unitaire (DH)"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="14dp"
+                        android:textColor="@color/calc_text_dark"
+                        android:textColorHint="@color/calc_hint"
+                        android:layout_marginBottom="12dp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="2026-04-01"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="14dp"
+                        android:textColor="@color/calc_text_dark"/>
+
+                </LinearLayout>
+
+                <!-- TYPE -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center">
+
+                    <Button
                         android:text="Normal"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
+                        android:background="@drawable/bg_type_selected"
+                        android:textColor="@android:color/white"
+                        android:paddingHorizontal="24dp"
+                        android:layout_marginEnd="10dp"/>
 
-                    <RadioButton
-                        android:id="@+id/rbDense"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="#5F706A"
+                    <Button
                         android:text="Dense (+20%)"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-                </RadioGroup>
+                        android:background="@drawable/bg_type_unselected"
+                        android:textColor="@color/calc_text_dark"
+                        android:paddingHorizontal="24dp"/>
+                </LinearLayout>
+
+                <!-- BUTTON -->
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:text="CALCULER ET PDF"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/bg_calculate_button"/>
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
-        <!-- BUTTON -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCalculer"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="CALCULER ET PDF"
-            android:textAllCaps="true"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:backgroundTint="#59C95A"
-            app:cornerRadius="20dp"
-            app:elevation="6dp" />
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
