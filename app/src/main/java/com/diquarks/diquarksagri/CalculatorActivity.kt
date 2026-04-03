@@ -2,23 +2,28 @@ package com.diquarks.diquarksagri
 
 import android.content.Context
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.diquarks.diquarksagri.data.PlantCalculation
 import com.diquarks.diquarksagri.utils.PdfGenerator
 import com.diquarks.diquarksagri.viewmodel.CalculatorViewModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class CalculatorActivity : AppCompatActivity() {
 
-    // 🔥 APPLY LANGUAGE
     override fun attachBaseContext(newBase: Context) {
         val prefs = newBase.getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val lang = prefs.getString("lang", "fr")
+        val lang = prefs.getString("lang", "fr") ?: "fr"
 
-        val locale = Locale(lang!!)
+        val locale = Locale(lang)
         Locale.setDefault(locale)
 
         val config = newBase.resources.configuration
@@ -30,6 +35,7 @@ class CalculatorActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CalculatorViewModel
     private var baseDensite: Double = 0.0
+    private var isDenseSelected: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +43,18 @@ class CalculatorActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[CalculatorViewModel::class.java]
 
-        val btnCalculer = findViewById<Button>(R.id.btnCalculer)
-        val etAcheteur = findViewById<EditText>(R.id.etAcheteur)
+        val btnCalculatePdf = findViewById<LinearLayout>(R.id.btnCalculatePdf)
+        val etBuyerName = findViewById<EditText>(R.id.etBuyerName)
         val etSurface = findViewById<EditText>(R.id.etSurface)
-        val etPrix = findViewById<EditText>(R.id.etPrix)
-        val rbNormal = findViewById<RadioButton>(R.id.rbNormal)
-        val rbDense = findViewById<RadioButton>(R.id.rbDense)
+        val etUnitPrice = findViewById<EditText>(R.id.etUnitPrice)
+        val etDensity = findViewById<EditText>(R.id.etDensity)
         val etDate = findViewById<EditText>(R.id.etDate)
+
+        val btnNormal = findViewById<Button>(R.id.btnNormal)
+        val btnDense = findViewById<Button>(R.id.btnDense)
+
         val ivPlant = findViewById<ImageView>(R.id.ivSelectedPlant)
         val tvPlantName = findViewById<TextView>(R.id.tvPlantName)
-        val tvDensite = findViewById<TextView>(R.id.tvDensite)
 
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         etDate.setText(today)
@@ -72,30 +80,48 @@ class CalculatorActivity : AppCompatActivity() {
             else -> 0.0
         }
 
-        tvDensite.text = baseDensite.toInt().toString()
+        etDensity.setText(baseDensite.toInt().toString())
 
-        rbNormal.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                tvDensite.text = baseDensite.toInt().toString()
+        fun updateCultureTypeUI() {
+            if (isDenseSelected) {
+                btnDense.setBackgroundResource(R.drawable.bg_type_selected)
+                btnDense.setTextColor(getColor(android.R.color.white))
+
+                btnNormal.setBackgroundResource(R.drawable.bg_type_unselected)
+                btnNormal.setTextColor(getColor(R.color.calc_text_dark))
+
+                etDensity.setText((baseDensite * 1.2).toInt().toString())
+            } else {
+                btnNormal.setBackgroundResource(R.drawable.bg_type_selected)
+                btnNormal.setTextColor(getColor(android.R.color.white))
+
+                btnDense.setBackgroundResource(R.drawable.bg_type_unselected)
+                btnDense.setTextColor(getColor(R.color.calc_text_dark))
+
+                etDensity.setText(baseDensite.toInt().toString())
             }
         }
 
-        rbDense.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                val denseValue = baseDensite * 1.2
-                tvDensite.text = denseValue.toInt().toString()
-            }
+        btnNormal.setOnClickListener {
+            isDenseSelected = false
+            updateCultureTypeUI()
         }
 
-        btnCalculer.setOnClickListener {
+        btnDense.setOnClickListener {
+            isDenseSelected = true
+            updateCultureTypeUI()
+        }
 
-            val buyer = etAcheteur.text.toString().trim()
-            val surface = etSurface.text.toString().toDoubleOrNull() ?: 0.0
-            val prix = etPrix.text.toString().toDoubleOrNull() ?: 0.0
-            val densiteFinale = tvDensite.text.toString().toDoubleOrNull() ?: 0.0
+        updateCultureTypeUI()
+
+        btnCalculatePdf.setOnClickListener {
+            val buyer = etBuyerName.text.toString().trim()
+            val surface = etSurface.text.toString().trim().toDoubleOrNull() ?: 0.0
+            val prix = etUnitPrice.text.toString().trim().toDoubleOrNull() ?: 0.0
+            val densiteFinale = etDensity.text.toString().trim().toDoubleOrNull() ?: 0.0
+            val selectedDate = etDate.text.toString().trim()
 
             if (buyer.isNotEmpty() && surface > 0 && densiteFinale > 0 && prix > 0) {
-
                 val totalPlants = viewModel.calculateTotalPlants(
                     surface,
                     densiteFinale,
@@ -111,10 +137,10 @@ class CalculatorActivity : AppCompatActivity() {
                     plantName = plantName,
                     surface = surface,
                     density = densiteFinale,
-                    isDense = rbDense.isChecked,
+                    isDense = isDenseSelected,
                     unitPrice = prix,
                     buyerName = buyer,
-                    date = today
+                    date = selectedDate
                 )
 
                 PdfGenerator.generate(

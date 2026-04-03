@@ -4,22 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_calculator_screen"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="28dp">
 
-        <!-- MAIN CARD -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/calc_card_bg"
             app:cardCornerRadius="30dp"
-            app:cardElevation="10dp"
-            android:background="@drawable/bg_main_card">
+            app:cardElevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,8 +33,8 @@
                 <!-- IMAGE -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    app:cardCornerRadius="20dp">
+                    android:layout_height="170dp"
+                    app:cardCornerRadius="22dp">
 
                     <ImageView
                         android:id="@+id/ivSelectedPlant"
@@ -41,133 +44,383 @@
                         android:src="@drawable/poivron" />
                 </androidx.cardview.widget.CardView>
 
-                <!-- TITLE -->
+                <!-- HEADER -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center_vertical">
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_round_plant_icon" />
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:background="@drawable/bg_round_plant_icon">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_plant"
+                            android:tint="@android:color/white" />
+                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:layout_marginStart="14dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvPlantName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="Poivron"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/calc_text_dark" />
+                            android:textColor="@color/calc_text_dark"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="Calculateur de production"
-                            android:textSize="12sp"
-                            android:textColor="@color/calc_hint" />
+                            android:textColor="@color/calc_hint"
+                            android:textSize="13sp" />
 
                         <View
-                            android:layout_width="40dp"
+                            android:layout_width="70dp"
                             android:layout_height="4dp"
-                            android:layout_marginTop="6dp"
-                            android:background="@drawable/bg_small_line"/>
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_small_line" />
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <!-- FORM -->
+                <!-- FORM CARD -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#F0F2F0"
+                    app:cardCornerRadius="26dp"
+                    app:cardElevation="3dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- BUYER -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <LinearLayout
+                                android:layout_width="52dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_icon_box"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:src="@drawable/ic_user"
+                                    android:tint="@android:color/white" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etBuyerName"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="Nom de l'acheteur"
+                                android:inputType="textPersonName"
+                                android:paddingStart="14dp"
+                                android:paddingEnd="10dp"
+                                android:textColor="@color/calc_text_dark"
+                                android:textColorHint="@color/calc_hint"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- SURFACE -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <LinearLayout
+                                android:layout_width="52dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_icon_box"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:src="@drawable/ic_surface"
+                                    android:tint="@android:color/white" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etSurface"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="Surface (Hectare)"
+                                android:inputType="numberDecimal"
+                                android:paddingStart="14dp"
+                                android:paddingEnd="10dp"
+                                android:textColor="@color/calc_text_dark"
+                                android:textColorHint="@color/calc_hint"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- DENSITY -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <LinearLayout
+                                android:layout_width="52dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_icon_box"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:src="@drawable/ic_density"
+                                    android:tint="@android:color/white" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etDensity"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="Densité (plants/ha)"
+                                android:inputType="number"
+                                android:paddingStart="14dp"
+                                android:paddingEnd="10dp"
+                                android:text="16000"
+                                android:textColor="@color/calc_text_dark"
+                                android:textColorHint="@color/calc_hint"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- PRICE -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <LinearLayout
+                                android:layout_width="52dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_icon_box"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:src="@drawable/ic_price"
+                                    android:tint="@android:color/white" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etUnitPrice"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_vertical"
+                                android:hint="Prix unitaire (DH)"
+                                android:inputType="numberDecimal"
+                                android:paddingStart="14dp"
+                                android:paddingEnd="10dp"
+                                android:textColor="@color/calc_text_dark"
+                                android:textColorHint="@color/calc_hint"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- DATE -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:background="@drawable/bg_input_field"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <LinearLayout
+                                android:layout_width="52dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_icon_box"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:src="@drawable/ic_date"
+                                    android:tint="@android:color/white" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etDate"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Date"
+                                android:paddingStart="14dp"
+                                android:paddingEnd="10dp"
+                                android:text="2026-04-03"
+                                android:textColor="@color/calc_text_dark"
+                                android:textColorHint="@color/calc_hint"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- TYPE TITLE -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="22dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <!-- INPUT -->
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:hint="Nom de l'acheteur"
-                        android:background="@drawable/bg_input_field"
-                        android:padding="14dp"
-                        android:textColor="@color/calc_text_dark"
-                        android:textColorHint="@color/calc_hint"
-                        android:layout_marginBottom="12dp"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="#D4DDD6" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:hint="Surface (Hectare)"
-                        android:background="@drawable/bg_input_field"
-                        android:padding="14dp"
-                        android:textColor="@color/calc_text_dark"
-                        android:textColorHint="@color/calc_hint"
-                        android:layout_marginBottom="12dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:text="16000"
-                        android:background="@drawable/bg_input_field"
-                        android:padding="14dp"
-                        android:textColor="@color/calc_text_dark"
-                        android:layout_marginBottom="12dp"/>
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginEnd="6dp"
+                            android:src="@drawable/ic_plant"
+                            android:tint="@color/calc_primary" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:hint="Prix unitaire (DH)"
-                        android:background="@drawable/bg_input_field"
-                        android:padding="14dp"
-                        android:textColor="@color/calc_text_dark"
-                        android:textColorHint="@color/calc_hint"
-                        android:layout_marginBottom="12dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Type de culture"
+                            android:textColor="@color/calc_text_dark"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:text="2026-04-01"
-                        android:background="@drawable/bg_input_field"
-                        android:padding="14dp"
-                        android:textColor="@color/calc_text_dark"/>
-
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="#D4DDD6" />
                 </LinearLayout>
 
-                <!-- TYPE -->
+                <!-- TYPE BUTTONS -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center">
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <Button
-                        android:text="Normal"
+                        android:id="@+id/btnNormal"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
                         android:background="@drawable/bg_type_selected"
+                        android:text="Normal"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white"
-                        android:paddingHorizontal="24dp"
-                        android:layout_marginEnd="10dp"/>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <Button
-                        android:text="Dense (+20%)"
+                        android:id="@+id/btnDense"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
                         android:background="@drawable/bg_type_unselected"
+                        android:text="Dense (+20%)"
+                        android:textAllCaps="false"
                         android:textColor="@color/calc_text_dark"
-                        android:paddingHorizontal="24dp"/>
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <!-- BUTTON -->
-                <Button
+                <LinearLayout
+                    android:id="@+id/btnCalculatePdf"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="20dp"
-                    android:text="CALCULER ET PDF"
-                    android:textColor="@android:color/white"
-                    android:background="@drawable/bg_calculate_button"/>
+                    android:layout_height="58dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/bg_calculate_button"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_pdf"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALCULER ET PDF"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
             </LinearLayout>
 
